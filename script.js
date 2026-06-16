@@ -78,10 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const videoObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const video = entry.target;
+            const isHero = video.id === 'heroVideo';
             
             if (entry.isIntersecting) {
-                // PC環境の場合のみ、ビューポートに入った時にsrcを設定してロード＆再生する
-                if (!isMobile) {
+                // PC環境、またはスマホのヒーロー動画の場合はロードして再生
+                if (!isMobile || isHero) {
                     const dataSrc = video.getAttribute('data-src');
                     if (dataSrc && !video.src) {
                         video.src = dataSrc;
@@ -92,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             } else {
-                if (!isMobile) {
+                if (!isMobile || isHero) {
                     video.pause();
                 }
             }
@@ -107,11 +108,17 @@ document.addEventListener('DOMContentLoaded', () => {
         video.setAttribute('playsinline', '');
         video.loop = true;
         
-        if (isMobile) {
-            // スマホ環境では動画リソースを一切ロードせず、ポスター画像のみを表示し続ける
+        const isHero = video.id === 'heroVideo';
+        
+        if (isMobile && !isHero) {
+            // スマホ環境ではヒーロー動画以外の動画リソースを一切ロードせず、ポスター画像のみを表示し続ける
             video.removeAttribute('src');
             video.preload = 'none';
         } else {
+            // ヒーロー動画、およびPC環境の動画はObserverで監視する
+            if (isHero) {
+                video.preload = 'auto';
+            }
             videoObserver.observe(video);
         }
     });
