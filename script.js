@@ -70,23 +70,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ==========================================================================
-       Video Performance Optimization (Autoplay & Pause on Scroll)
+       Video Performance Optimization (Autoplay & Pause on Scroll & Lazy Loading)
        ========================================================================== */
     const videos = document.querySelectorAll('video');
+    const isMobile = window.innerWidth < 768; // スマホ環境かどうかの簡易判定
     
     const videoObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const video = entry.target;
             
             if (entry.isIntersecting) {
-                // Play video when in viewport
-                video.play().catch(error => {
-                    // Fail silently or handle browsers blocking autoplay without user interaction
-                    console.log('Autoplay prevented or failed:', error);
-                });
+                // PC環境の場合のみ、ビューポートに入った時にsrcを設定してロード＆再生する
+                if (!isMobile) {
+                    const dataSrc = video.getAttribute('data-src');
+                    if (dataSrc && !video.src) {
+                        video.src = dataSrc;
+                        video.load();
+                    }
+                    video.play().catch(error => {
+                        console.log('Autoplay prevented or failed:', error);
+                    });
+                }
             } else {
-                // Pause video when out of viewport to save CPU/Battery
-                video.pause();
+                if (!isMobile) {
+                    video.pause();
+                }
             }
         });
     }, {
@@ -99,6 +107,12 @@ document.addEventListener('DOMContentLoaded', () => {
         video.setAttribute('playsinline', '');
         video.loop = true;
         
-        videoObserver.observe(video);
+        if (isMobile) {
+            // スマホ環境では動画リソースを一切ロードせず、ポスター画像のみを表示し続ける
+            video.removeAttribute('src');
+            video.preload = 'none';
+        } else {
+            videoObserver.observe(video);
+        }
     });
 });
