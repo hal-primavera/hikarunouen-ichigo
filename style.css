@@ -2,21 +2,21 @@
    Design System Variables & Base Settings
    ========================================================================== */
 :root {
-    /* Colors */
-    --bg-primary: #080808;
-    --bg-secondary: #121212;
-    --bg-tertiary: #1a1a1a;
+    /* Colors - Light Theme with Gold Accents */
+    --bg-primary: #fafaf9;      /* 高級感のあるウォームホワイト（オフホワイト） */
+    --bg-secondary: #f4f4f3;    /* やや深みのあるオフホワイト */
+    --bg-tertiary: #eaeaeb;     /* さらに落ち着いたトーン */
     
-    --accent-gold: #d4af37;
-    --accent-gold-rgb: 212, 175, 55;
-    --accent-gold-hover: #e5c158;
+    --accent-gold: #b89020;     /* 白背景に映える、視認性の高い落ち着いたゴールド */
+    --accent-gold-rgb: 184, 144, 32;
+    --accent-gold-hover: #9c7816;
     
-    --text-white: #ffffff;
-    --text-muted: #c5c5c7; /* コントラストを高めるために明るめのグレーに変更 */
-    --text-dark: #1c1c1e;
+    --text-white: #1c1c1c;      /* 元の text-white だった箇所をダークグレーに */
+    --text-muted: #555555;      /* コントラストを担保した中間グレー */
+    --text-dark: #fafaf9;       /* ボタン等の反転表示用（背景がゴールドの時など） */
     
-    --border-color: rgba(212, 175, 55, 0.15);
-    --border-light: rgba(255, 255, 255, 0.08);
+    --border-color: rgba(184, 144, 32, 0.2);
+    --border-light: rgba(0, 0, 0, 0.08);
     
     /* Transitions */
     --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -140,12 +140,12 @@ img, video {
 
 .btn-secondary {
     background-color: transparent;
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(0, 0, 0, 0.2);
     color: var(--text-white);
 }
 
 .btn-secondary:hover {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(0, 0, 0, 0.03);
     border-color: var(--text-white);
 }
 
@@ -186,7 +186,7 @@ img, video {
 }
 
 .site-header.scrolled {
-    background-color: rgba(8, 8, 8, 0.85);
+    background-color: rgba(250, 250, 249, 0.85);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--border-light);
@@ -221,8 +221,15 @@ img, video {
 
 .nav-menu a {
     font-size: 0.85rem;
+    font-weight: 600;
     letter-spacing: 0.1em;
-    color: var(--text-muted);
+    color: var(--text-white);
+    text-shadow: 
+        -1.5px -1.5px 0 var(--bg-primary),
+         1.5px -1.5px 0 var(--bg-primary),
+        -1.5px  1.5px 0 var(--bg-primary),
+         1.5px  1.5px 0 var(--bg-primary),
+         0 0 8px var(--bg-primary);
 }
 
 .nav-menu a:hover {
@@ -233,6 +240,8 @@ img, video {
     border: 1px solid var(--accent-gold);
     padding: 8px 20px;
     color: var(--accent-gold);
+    background-color: rgba(250, 250, 249, 0.8);
+    border-radius: 2px;
 }
 
 .nav-menu .nav-cta:hover {
@@ -271,7 +280,7 @@ img, video {
         max-width: 320px;
         height: 100vh;
         background-color: var(--bg-secondary);
-        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.08);
         padding: 100px 40px;
         transition: var(--transition-smooth);
     }
@@ -338,7 +347,7 @@ img, video {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, rgba(0,0,0,0.5) 0%, rgba(8,8,8,0.95) 100%); /* 文字の視認性向上のために少し暗めに調整 */
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(250,250,249,0.85) 100%);
     z-index: 2;
 }
 
@@ -358,6 +367,12 @@ img, video {
     color: var(--accent-gold);
     text-transform: uppercase;
     margin-bottom: 24px;
+    text-shadow: 
+        -1.5px -1.5px 0 var(--bg-primary),
+         1.5px -1.5px 0 var(--bg-primary),
+        -1.5px  1.5px 0 var(--bg-primary),
+         1.5px  1.5px 0 var(--bg-primary),
+         0 0 8px var(--bg-primary);
 }
 
 .hero-title {
@@ -366,13 +381,29 @@ img, video {
     line-height: 1.4;
     letter-spacing: 0.1em;
     margin-bottom: 24px;
-    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    text-shadow: 
+        -2px -2px 0 var(--bg-primary),
+         2px -2px 0 var(--bg-primary),
+        -2px  2px 0 var(--bg-primary),
+         2px  2px 0 var(--bg-primary),
+        -3px  0px 0 var(--bg-primary),
+         3px  0px 0 var(--bg-primary),
+         0px -3px 0 var(--bg-primary),
+         0px  3px 0 var(--bg-primary),
+         0 0 10px var(--bg-primary),
+         0 0 20px var(--bg-primary);
 }
 
 .hero-desc {
     font-size: clamp(1rem, 2.5vw, 1.25rem);
     color: var(--text-muted);
     margin-bottom: 40px;
+    text-shadow: 
+        -1.5px -1.5px 0 var(--bg-primary),
+         1.5px -1.5px 0 var(--bg-primary),
+        -1.5px  1.5px 0 var(--bg-primary),
+         1.5px  1.5px 0 var(--bg-primary),
+         0 0 8px var(--bg-primary);
 }
 
 .hero-actions {
@@ -412,7 +443,7 @@ img, video {
 .scroll-indicator .arrow {
     width: 1px;
     height: 40px;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.15);
     position: relative;
     overflow: hidden;
 }
@@ -497,8 +528,8 @@ img, video {
     overflow: hidden;
     aspect-ratio: 16/9;
     border: 1px solid var(--border-color);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-    background-color: #000;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    background-color: #fcfcfc;
 }
 
 .video-card video {
@@ -536,8 +567,8 @@ img, video {
 
 .product-card:hover {
     transform: translateY(-8px);
-    border-color: rgba(212, 175, 55, 0.4);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    border-color: rgba(184, 144, 32, 0.4);
+    box-shadow: 0 15px 35px rgba(184, 144, 32, 0.1);
 }
 
 .product-img-wrapper {
@@ -614,57 +645,72 @@ img, video {
     background-color: var(--bg-secondary);
 }
 
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.gallery-item {
+.gallery-slideshow-container {
     position: relative;
-    aspect-ratio: 1;
-    overflow: hidden;
-    border: 1px solid var(--border-light);
-    cursor: pointer;
-}
-
-.gallery-item.large {
-    grid-column: span 2;
-    aspect-ratio: auto;
-}
-
-.gallery-item video, .gallery-item img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: var(--transition-smooth);
+    max-width: 550px;
+    margin: 0 auto;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    background-color: var(--bg-secondary);
 }
 
-.gallery-item:hover video, .gallery-item:hover img {
-    transform: scale(1.05);
+@media (max-width: 768px) {
+    .gallery-slideshow-container {
+        max-width: 90%;
+        aspect-ratio: 1/1;
+    }
 }
 
-.gallery-overlay {
+.gallery-slide {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.5s ease-in-out;
+    z-index: 1;
+}
+
+.gallery-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 2;
+}
+
+.gallery-slide img, .gallery-slide video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery-slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(250, 250, 249, 0.95);
     opacity: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
     transition: var(--transition-fast);
+    z-index: 3;
 }
 
-.gallery-item:hover .gallery-overlay {
+.gallery-slide:hover .gallery-slide-overlay {
     opacity: 1;
 }
 
-.gallery-overlay span {
-    font-size: 1rem;
+.gallery-slide-overlay span {
+    font-size: 1.1rem;
     letter-spacing: 0.1em;
     color: var(--text-white);
     border-bottom: 1px solid var(--accent-gold);
@@ -672,14 +718,70 @@ img, video {
     text-align: center;
 }
 
-@media (max-width: 768px) {
-    .gallery-grid {
-        grid-template-columns: 1fr;
+.slideshow-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(250, 250, 249, 0.85);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid var(--border-color);
+    color: var(--text-white);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    transition: var(--transition-fast);
+}
+
+.slideshow-arrow:hover {
+    background: var(--accent-gold);
+    color: var(--text-dark);
+    border-color: var(--accent-gold);
+}
+
+.slideshow-arrow.prev {
+    left: 20px;
+}
+
+.slideshow-arrow.next {
+    right: 20px;
+}
+
+@media (max-width: 576px) {
+    .slideshow-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
     }
-    .gallery-item.large {
-        grid-column: span 1;
-        aspect-ratio: 1;
-    }
+    .slideshow-arrow.prev { left: 10px; }
+    .slideshow-arrow.next { right: 10px; }
+}
+
+.slideshow-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.slideshow-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.slideshow-dot.active {
+    background: var(--accent-gold);
+    transform: scale(1.2);
 }
 
 /* ==========================================================================
@@ -714,7 +816,7 @@ img, video {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(8, 8, 8, 0.9); /* 文字の視認性向上のために不透明度をアップ */
+    background-color: rgba(250, 250, 249, 0.85);
     z-index: 2;
 }
 
@@ -742,7 +844,7 @@ img, video {
    Footer
    ========================================================================== */
 .site-footer {
-    background-color: #050505;
+    background-color: #eae9e4;
     border-top: 1px solid var(--border-light);
     padding: 80px 24px 40px;
 }
@@ -855,7 +957,7 @@ img, video {
     border-radius: 4px;
     overflow: hidden;
     border: 1px solid var(--border-color);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
     background-color: var(--bg-secondary);
     aspect-ratio: 3/4;
 }
@@ -942,5 +1044,36 @@ img, video {
         margin: 24px 0;
         padding: 16px 0;
         gap: 16px;
+    }
+}
+
+/* ==========================================================================
+   Header Logo & Wine Image Grid Styles (Added)
+   ========================================================================== */
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+    border-radius: 4px;
+    object-fit: contain;
+}
+
+.wine-images-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 576px) {
+    .wine-images-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        max-width: 280px;
+        margin: 0 auto;
     }
 }
